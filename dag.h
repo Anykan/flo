@@ -63,12 +63,6 @@ int DAG ( int anzahlKnoten, int ** AdjMat, int ** Kantengewicht, int * Eingangsg
 			}
 		}
 	}
-	
-//	ShowIntVect( 1, anzahlKnoten, Vorgaenger, "Vorgaenger" );
-//	ShowIntVect ( 1, anzahlKnoten, WeglaengeZuKnoten, "WeglaengeZuKnoten" );	
-//	ShowIntMat ( 1, anzahlKnoten, 0, anzahlKnoten, AdjMat, "AdjMat" );
-
-
 	if (TopologischeSortierung != NULL) free ( TopologischeSortierung );
 
 	return 1;
@@ -79,6 +73,7 @@ int ShowShortestPath ( int anzahlKnoten, int ** AdjMat, int startKnoten, int zie
 {
 	if ( WeglaengeZuKnoten[ zielKnoten ] < MAX )
 	{	
+/*
 		printf ( "\nKuerzester Weg von Startknoten %d zu Zielknoten %d mit Weglaenge %d:  ", startKnoten, zielKnoten, WeglaengeZuKnoten[ zielKnoten ] );
 		int vorg = zielKnoten;
 		int from_tmp = startKnoten;
@@ -96,6 +91,24 @@ int ShowShortestPath ( int anzahlKnoten, int ** AdjMat, int startKnoten, int zie
 			from_tmp = vorg_tmp;
 		}
 		printf ( "\n" );
+*/
+
+		//eigene ausgabe
+		int vorg = zielKnoten;
+		int from_tmp = startKnoten;
+		int vorg_tmp;
+		while (from_tmp != zielKnoten){
+			vorg = zielKnoten;
+			while (from_tmp != vorg)
+			{
+				vorg_tmp = vorg;
+				vorg = Vorgaenger[ vorg ];
+			}
+			if (vorg_tmp<(anzahlKnoten-2)/2){
+				printf ("->%d",vorg_tmp);
+			}
+			from_tmp = vorg_tmp;
+		}
 	}
 	else
 	{
